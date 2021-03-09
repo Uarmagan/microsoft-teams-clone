@@ -1,7 +1,7 @@
 import '../styles/global.css';
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import UserContext from 'lib/UserContext';
+import UserContext from '~/lib/auth';
 import { supabase } from 'lib/Store';
 
 export default function SupabaseSlackClone({ Component, pageProps }) {

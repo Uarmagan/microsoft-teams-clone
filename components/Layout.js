@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import { useContext } from 'react'
-import UserContext from '~/lib/UserContext'
-import { addChannel } from '~/lib/Store'
+import Link from 'next/link';
+import { useContext } from 'react';
+import UserContext from '~/lib/auth';
+import { addChannel } from '~/lib/Store';
 
 export default function Layout(props) {
-  const { signOut } = useContext(UserContext)
+  const { signOut } = useContext(UserContext);
 
   const slugify = (text) => {
     return text
@@ -14,29 +14,27 @@ export default function Layout(props) {
       .replace(/[^\w-]+/g, '') // Remove all non-word chars
       .replace(/--+/g, '-') // Replace multiple - with single -
       .replace(/^-+/, '') // Trim - from start of text
-      .replace(/-+$/, '') // Trim - from end of text
-  }
+      .replace(/-+$/, ''); // Trim - from end of text
+  };
 
   const newChannel = async () => {
-    const slug = prompt('Please enter your name')
+    const slug = prompt('Please enter your name');
     if (slug) {
-      addChannel(slugify(slug))
+      addChannel(slugify(slug));
     }
-  }
+  };
 
   return (
     <main className="main flex h-screen w-screen overflow-hidden">
       {/* Sidebar */}
       <nav
         className="w-64 bg-gray-900 text-gray-100 overflow-scroll "
-        style={{ maxWidth: '20%', minWidth: 150, maxHeight: '100vh' }}
-      >
+        style={{ maxWidth: '20%', minWidth: 150, maxHeight: '100vh' }}>
         <div className="p-2 ">
           <div className="p-2">
             <button
               className="bg-blue-900 hover:bg-blue-800 text-white py-2 px-4 rounded w-full transition duration-150"
-              onClick={() => newChannel()}
-            >
+              onClick={() => newChannel()}>
               New Channel
             </button>
           </div>
@@ -44,8 +42,7 @@ export default function Layout(props) {
           <div className="p-2">
             <button
               className="bg-blue-900 hover:bg-blue-800 text-white py-2 px-4 rounded w-full transition duration-150"
-              onClick={() => signOut()}
-            >
+              onClick={() => signOut()}>
               Log out
             </button>
           </div>
@@ -66,7 +63,7 @@ export default function Layout(props) {
       {/* Messages */}
       <div className="flex-1 bg-gray-800 h-screen">{props.children}</div>
     </main>
-  )
+  );
 }
 
 const SidebarItem = ({ channel, isActiveChannel }) => (
@@ -77,4 +74,4 @@ const SidebarItem = ({ channel, isActiveChannel }) => (
       </Link>
     </li>
   </>
-)
+);
